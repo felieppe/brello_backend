@@ -21,3 +21,5 @@ router.get('/:id', (req, res) => {
     if (!member) return res.status(404).json({ success: false, data: null, message: "Member not found." })
     return res.status(200).json({ success: true, data: member, message: "Found member." })
 })
+
+module.exports = router
