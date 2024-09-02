@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "axios": "^1.7.7",
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "express": "^4.19.2"
+  },
+  "name": "brello_backend",
+  "version": "1.0.0",
+  "description": "Backend for Brello project",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felieppe/brello_backend.git"
+  },
+  "keywords": [
+    "Brello",
+    "Backend",
+    "Node.js"
+  ],
+  "author": "Felipe Cabrera",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/felieppe/brello_backend/issues"
+  },
+  "homepage": "https://github.com/felieppe/brello_backend#readme"
+}
