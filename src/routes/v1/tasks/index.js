@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { v4: uuidv4 } = require('uuid')
 
 const tasks = [
     {
@@ -23,6 +24,16 @@ router.get('/:id', (req, res) => {
 
     if (!task) return res.status(404).json({ success: false, data: null, message: "Task not found." })
     return res.status(200).json({ success: true, data: task, message: "Found task." })
+})
+
+router.post('/', (req, res) => {
+    const { title, description, assigned, priority, state, limit } = req.body
+    if (!title || !description || !limit) return res.status(400).json({ success: false, data: null, message: "Missing fields." })
+
+    const task = { id: uuidv4(), title: title, description: description, assigned: [parseInt(assigned)], priority: priority ? priority : 0  , state: state, limit: limit }
+    tasks.push(task)
+
+    return res.status(201).json({ success: true, data: task, message: "Task created." })
 })
 
 module.exports = router
