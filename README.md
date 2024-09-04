@@ -16,7 +16,7 @@ Brello is a clone of the popular Trello task management application. This projec
 
 - **Task Management**: Create, read, update, and delete tasks.
 - **Board Management**: Organize tasks within boards.
-- **List Management**: Group tasks into lists on each board.
+- **Column Management**: Group tasks into columns on each board.
 
 ## Technologies
 
