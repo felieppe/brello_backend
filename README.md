@@ -69,6 +69,10 @@ The server will be running on `http://localhost:3005`.
 
 -   **GET** `/v1/members` - Get all members.
 -   **GET** `/v1/members/:id` - Get a member by ID.
+-   **POST** `/v1/members/` - Create a member.
+-   **PUT** `/v1/members/:id` - Edit a whole member.
+-   **PATCH** `/v1/members/:id` - Edit a field or more of a task
+-   **DELETE** `/v1/members/:id` - Remove a task
 
 ## Contributing
 
