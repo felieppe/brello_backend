@@ -7,6 +7,6 @@ const columns = require('./columns/')
 
 router.use('/tasks/', tasks)
 router.use('/members/', members)
-router.use('/columns', columns)
+router.use('/columns/', columns)
 
 module.exports = router
