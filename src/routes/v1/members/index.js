@@ -34,4 +34,15 @@ router.get('/:id', (req, res) => {
     return res.status(200).json({ success: true, data: member, message: "Found member." })
 })
 
+router.post('/', (req, res) => {
+    const { name, email, role, pfp } = req.body
+    if (!name || !email || !role) return res.status(400).json({ success: false, data: null, message: "Missing fields." })
+
+    const member = { id: uuidv4(), name: name, email: email, role: role, pfp: pfp }
+    members.push(member)
+
+    saveMembers()
+    return res.status(201).json({ success: true, data: member, message: "Member created." })
+})
+
 module.exports = router
