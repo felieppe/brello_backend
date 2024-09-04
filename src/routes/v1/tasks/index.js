@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { v4: uuidv4 } = require('uuid')
 
-const tasks = [
+var tasks = [
     {
         id: "40d4eb3d-41c9-4c51-9a31-002c8b1b421a",
         title: "Task 1",
@@ -34,6 +34,13 @@ router.post('/', (req, res) => {
     tasks.push(task)
 
     return res.status(201).json({ success: true, data: task, message: "Task created." })
+})
+
+router.delete('/:id', (req, res) => {
+    const id = req.params.id
+    tasks = tasks.filter(task => task.id !== id)
+
+    return res.status(200).json({ success: true, data: {}, message: "Task deleted." })
 })
 
 module.exports = router
