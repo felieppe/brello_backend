@@ -39,7 +39,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const { title, description, assigned, priority, state, limit } = req.body
-    if (!title || !description || !limit) return res.status(400).json({ success: false, data: null, message: "Missing fields." })
+    if (!title || !description || !state || !limit) return res.status(400).json({ success: false, data: null, message: "Missing fields." })
 
     const task = { id: uuidv4(), title: title, description: description, assigned: [parseInt(assigned)], priority: priority ? priority : 0  , state: state, limit: limit }
     tasks.push(task)
