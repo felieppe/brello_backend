@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const compression = require('compression')
+const cors = require('cors')
 const fs = require('fs')
 
 const app = express()
@@ -8,6 +9,7 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(compression())
+app.use(cors({ origin: '*', methods: 'GET,POST,PUT,DELETE' }))
 
 const v1 = require('./routes/v1')
 app.use('/v1', v1)
