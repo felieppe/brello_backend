@@ -14,7 +14,7 @@ app.use(cors({ origin: '*', methods: 'GET,POST,PUT,DELETE' }))
 const v1 = require('./routes/v1')
 app.use('/v1', v1)
 
-const DB = ['./db/tasks.json', './db/members.json']
+const DB = ['./db/tasks.json', './db/members.json', './db/columns.json']
 DB.map((path) => {
     if (!fs.existsSync(path)) {
         fs.mkdirSync(path.split('/').slice(0, -1).join('/'), { recursive: true })
