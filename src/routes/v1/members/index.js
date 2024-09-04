@@ -1,14 +1,26 @@
 const express = require('express')
 const router = express.Router()
 
-const members = [
-    {
-        id: 1,
-        name: "Felipe Cabrera",
-        pfp: "https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg",
-        email: "me@felieppe.com"
+const DB_MEMBERS = './db/members.json'
+var members = []
+
+function getMembers() {
+    if (!fs.existsSync(DB_MEMBERS)) {
+        fs.mkdirSync(DB_MEMBERS.split('/').slice(0, -1).join('/'), { recursive: true })
+        fs.writeFileSync(DB_MEMBERS, JSON.stringify([]))
     }
-]
+
+    return JSON.parse(fs.readFileSync(DB_MEMBERS))
+}
+
+function saveMembers() {
+    fs.writeFileSync(DB_MEMBERS, JSON.stringify(members))
+}
+
+router.use((req, res, next) => {
+    members = getMembers()
+    next()
+})
 
 router.get('/', (req, res) => {
     return res.status(200).json({ success: true, data: members, message: "Found members." })
