@@ -1,18 +1,29 @@
 const express = require('express')
 const router = express.Router()
 const { v4: uuidv4 } = require('uuid')
+const fs = require('fs')
 
-var tasks = [
-    {
-        id: "40d4eb3d-41c9-4c51-9a31-002c8b1b421a",
-        title: "Task 1",
-        description: "This is the first task.",
-        assigned: [1],
-        priority: 3,
-        state: 3,
-        limit: undefined
+const DB_TASKS = './db/tasks.json'
+
+var tasks = []
+
+function getTasks() {
+    if (!fs.existsSync(DB_TASKS)) {
+        fs.mkdirSync(DB_TASKS.split('/').slice(0, -1).join('/'), { recursive: true })
+        fs.writeFileSync(DB_TASKS, JSON.stringify([]))
     }
-]
+
+    return JSON.parse(fs.readFileSync(DB_TASKS))
+}
+
+function saveTasks() {
+    fs.writeFileSync(DB_TASKS, JSON.stringify(tasks))
+}
+
+router.use((req, res, next) => {
+    tasks = getTasks()
+    next()
+})
 
 router.get('/', (req, res) => {
     return res.status(200).json({ success: true, data: tasks, message: "Found tasks." })
@@ -33,6 +44,7 @@ router.post('/', (req, res) => {
     const task = { id: uuidv4(), title: title, description: description, assigned: [parseInt(assigned)], priority: priority ? priority : 0  , state: state, limit: limit }
     tasks.push(task)
 
+    saveTasks()
     return res.status(201).json({ success: true, data: task, message: "Task created." })
 })
 
@@ -52,6 +64,7 @@ router.put('/:id', (req, res) => {
     task.state = state
     task.limit = limit
 
+    saveTasks()
     return res.status(200).json({ success: true, data: task, message: "Task updated." })
 })
 
@@ -69,6 +82,7 @@ router.patch('/:id', (req, res) => {
     if (state) task.state = state
     if (limit) task.limit = limit
 
+    saveTasks()
     return res.status(200).json({ success: true, data: task, message: "Task updated." })
 })
 
@@ -76,6 +90,7 @@ router.delete('/:id', (req, res) => {
     const id = req.params.id
     tasks = tasks.filter(task => task.id !== id)
 
+    saveTasks()
     return res.status(200).json({ success: true, data: {}, message: "Task deleted." })
 })
 
