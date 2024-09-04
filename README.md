@@ -35,8 +35,8 @@ Before you begin, ensure you have the following installed on your local machine:
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/yourusername/brello-backend.git
-    cd brello-backend
+    git clone https://github.com/felieppe/brello_backend.git
+    cd brello_backend
     ```
 
 2. **Install dependencies**:
