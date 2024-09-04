@@ -36,6 +36,25 @@ router.post('/', (req, res) => {
     return res.status(201).json({ success: true, data: task, message: "Task created." })
 })
 
+router.put('/:id', (req, res) => {
+    const id = req.params.id
+    const { title, description, assigned, priority, state, limit } = req.body
+    if (!title || !description || !assigned || !priority || !state || !limit) return res.status(400).json({ success: false, data: null, message: "Missing fields." })
+
+    const task = tasks.find(task => task.id === id)
+
+    if (!task) return res.status(404).json({ success: false, data: null, message: "Task not found." })
+
+    task.title = title
+    task.description = description
+    task.assigned = [parseInt(assigned)]
+    task.priority = priority
+    task.state = state
+    task.limit = limit
+
+    return res.status(200).json({ success: true, data: task, message: "Task updated." })
+})
+
 router.patch('/:id', (req, res) => {
     const id = req.params.id
     const { title, description, assigned, priority, state, limit } = req.body
