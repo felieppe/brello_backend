@@ -60,11 +60,10 @@ The server will be running on `http://localhost:3005`.
 
 -   **GET** `/v1/tasks` - Get all tasks.
 -   **GET** `/v1/tasks/:id` - Get a task by ID.
-
-### Members
-
--   **GET** `/v1/members` - Get all members.
--   **GET** `/v1/members/:id` - Get a member by ID.
+-   **POST** `/v1/tasks/` - Post a task.
+-   **PUT** `/v1/tasks/:id` - Edit a whole task.
+-   **PATCH** `/v1/tasks/:id` - Edit a field or more of a task.
+-   **DELETE** `/v1/tasks/:id` - Remove a task.
 
 ## Contributing
 
