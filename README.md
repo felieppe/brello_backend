@@ -65,6 +65,11 @@ The server will be running on `http://localhost:3005`.
 -   **PATCH** `/v1/tasks/:id` - Edit a field or more of a task.
 -   **DELETE** `/v1/tasks/:id` - Remove a task.
 
+### Members
+
+-   **GET** `/v1/members` - Get all members.
+-   **GET** `/v1/members/:id` - Get a member by ID.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request or open an issue.
