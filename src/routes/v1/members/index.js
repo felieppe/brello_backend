@@ -80,4 +80,15 @@ router.patch('/:id', (req, res) => {
     return res.status(200).json({ success: true, data: member, message: "Member updated." })
 })
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id
+    const member = members.find(member => member.id === id)
+
+    if (!member) return res.status(404).json({ success: false, data: null, message: "Member not found." })
+
+    members = members.filter(member => member.id !== id)
+    saveMembers()
+    return res.status(200).json({ success: true, data: member, message: "Member deleted." })
+})
+
 module.exports = router
