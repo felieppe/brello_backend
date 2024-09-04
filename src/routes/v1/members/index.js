@@ -63,4 +63,21 @@ router.put('/:id', (req, res) => {
     return res.status(200).json({ success: true, data: member, message: "Member updated." })
 })
 
+router.patch('/:id', (req, res) => {
+    const id = req.params.id
+    const { name, email, role, pfp } = req.body
+
+    const member = members.find(member => member.id === id)
+
+    if (!member) return res.status(404).json({ success: false, data: null, message: "Member not found." })
+
+    if (name) member.name = name
+    if (email) member.email = email
+    if (role) member.role = role
+    if (pfp) member.pfp = pfp
+
+    saveMembers()
+    return res.status(200).json({ success: true, data: member, message: "Member updated." })
+})
+
 module.exports = router
