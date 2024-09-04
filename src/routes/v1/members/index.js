@@ -45,4 +45,22 @@ router.post('/', (req, res) => {
     return res.status(201).json({ success: true, data: member, message: "Member created." })
 })
 
+router.put('/:id', (req, res) => {
+    const id = req.params.id
+    const { name, email, role, pfp } = req.body
+    if (!name || !email || !role) return res.status(400).json({ success: false, data: null, message: "Missing fields." })
+
+    const member = members.find(member => member.id === id)
+
+    if (!member) return res.status(404).json({ success: false, data: null, message: "Member not found." })
+
+    member.name = name
+    member.email = email
+    member.role = role
+    member.pfp = pfp
+
+    saveMembers()
+    return res.status(200).json({ success: true, data: member, message: "Member updated." })
+})
+
 module.exports = router
